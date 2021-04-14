@@ -25,5 +25,6 @@ class User(DynamicDocument, DocumentBase):
     last_name = fields.StringField(max_length=160, required=True)
     email = fields.StringField(max_length=160, required=True)
     password = fields.StringField(max_length=160, required=True)
+    address = fields.ListField()
 
 

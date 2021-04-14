@@ -4,7 +4,6 @@ from datetime import datetime
 from littlenv import littlenv
 from app.core import exceptions
 from app.core.process import ServicesProcess
-from app.core.models import Rule
 
 
 littlenv.load()
@@ -16,3 +15,8 @@ class SignProcessHandler:
     def init():     
         service = ServicesProcess()
         return service.init()
+
+    @staticmethod
+    def find(params: dict):     
+        service = ServicesProcess()
+        return service.find(params)

@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import List
 
 from pydantic import BaseModel
 
@@ -8,20 +9,19 @@ class ProductSerializer(BaseModel):
     description: str
     stock: float
 
-
-class DocumentType(str, Enum):
-    ni = "NI"
-    ti = "TI"
-    cc = "CC"
-    pa = "PA"
-    ce = "CE"
-    rc = "RC"
-    cd = "CD"
-    pe = "PE"
-
-
-class Item:
+class MetaPaginate(BaseModel):
+    current_page: int
+    item_per_page: int
+    total_page: int
+    available_orders: List
+class BasePaginate(BaseModel):
+    data: List
+    meta: MetaPaginate
+class User(BaseModel): 
     name: str
+    last_name: str
+    email: str
+    address: List
 
-    def __init__(self, name: str):
-        self.name = name
+class UserPaginate(BasePaginate):
+    data: List[User]
