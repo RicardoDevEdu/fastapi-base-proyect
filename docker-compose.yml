@@ -1,0 +1,10 @@
+version: "3.3"
+services: 
+  api:
+    container_name: "fastapi-base-api"
+    build: .
+    ports: 
+      - 8080:8000
+    volumes: 
+      - ./:/ap
+
