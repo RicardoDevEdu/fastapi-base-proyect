@@ -8,7 +8,6 @@ cp ./requirements.txt /app/requirements.txt
 
 pip3 install -r /app/requirements.txt
 
-cp ./app/ /app
 
 /user/local/bin/gunicorn \
     -b 0.0.0.0 80 \
