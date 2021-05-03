@@ -14,7 +14,7 @@ except:
 API_VERSION = "v0.1"
 APP_NAME = os.getenv("APP_NAME", "demo")
 APP_DESCRIPTION = os.getenv("APP_DESCRIPTION", "Descripcion demo")
-SENTRY = os.getenv("SENTRY", "")
+SENTRY = os.getenv("SENTRY", "https://6ecb72f8e4294465bcfa41913285a7fb@o533297.ingest.sentry.io/5652760git add")
 
 
 async def connect_db():
