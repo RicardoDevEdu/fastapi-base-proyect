@@ -15,7 +15,12 @@ from config.settings.base import (
 )
 
 
-littlenv.load()
+try:
+    littlenv.load()
+except:
+    pass
+
+
 itemsInit = {}
 
 

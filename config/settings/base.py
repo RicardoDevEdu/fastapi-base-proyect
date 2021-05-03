@@ -6,7 +6,10 @@ from botocore.config import Config
 from littlenv import littlenv
 from mongoengine import connect, disconnect
 
-littlenv.load()
+try:
+    littlenv.load()
+except:
+    pass
 
 API_VERSION = "v0.1"
 APP_NAME = os.getenv("APP_NAME", "demo")

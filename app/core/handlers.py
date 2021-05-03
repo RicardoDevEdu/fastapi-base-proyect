@@ -6,7 +6,8 @@ from app.core import exceptions
 from app.core.process import ServicesProcess
 
 
-littlenv.load()
+
+#littlenv.load()
 
 
 class SignProcessHandler:
