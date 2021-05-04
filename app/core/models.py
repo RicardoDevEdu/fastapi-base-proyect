@@ -9,7 +9,7 @@ from mongoengine import (
 
 
 class DocumentBase:
-    meta = {'db_alias': os.getenv("MONGO_NAME")}
+    meta = {'db_alias': os.environ.get("MONGO_NAME")}
     created_at = fields.DateTimeField(
         default=datetime.now(),
     )
