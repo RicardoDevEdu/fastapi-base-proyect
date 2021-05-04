@@ -53,7 +53,7 @@ def live_cache(date_consultation):
     now = datetime.utcnow()
     date_delta = date_consultation + timedelta(
         days=int(
-            os.getenv('AGILDATA_CACHE')
+            os.environ.get('AGILDATA_CACHE')
         ))
     return date_delta > now
 
