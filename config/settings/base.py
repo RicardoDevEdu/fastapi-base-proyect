@@ -27,7 +27,7 @@ async def connect_db():
     :return: connect mongodb
     """
     MONGO_HOST=f"mongodb+srv://{MONGO_USER}:{MONGO_PASSWORD}@cluster0.akvsq.mongodb.net/{MONGO_NAME}?retryWrites=true&w=majority"
-    connect(MONGO_HOST)
+    connect(host=MONGO_HOST)
 
 
 async def close_db():
