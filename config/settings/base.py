@@ -17,19 +17,17 @@ APP_DESCRIPTION = os.environ.get("APP_DESCRIPTION", "Descripcion demo")
 SENTRY = os.environ.get("SENTRY", "https://6ecb72f8e4294465bcfa41913285a7fb@o533297.ingest.sentry.io/5652760")
 
 
+MONGO_NAME=os.environ.get('MONGO_NAME', 'test')
+MONGO_USER=os.environ.get('MONGO_USER', 'test')
+MONGO_PASSWORD=os.environ.get("MONGO_PASSWORD", "test")
+
 async def connect_db():
     """
 
     :return: connect mongodb
     """
-    connect(
-        os.environ.get('MONGO_NAME', 'test'),
-        host=os.environ.get('MONGO_HOST', 'test'),
-        port=int(os.environ.get('MONGO_PORT', 'test')),
-        username=os.environ.get('MONGO_USER', 'test'),
-        password=os.environ.get("MONGO_PASSWORD", "test"),
-        alias=os.environ.get('MONGO_NAME', 'test')
-    )
+    MONGO_HOST=f"mongodb+srv://{MONGO_USER}:{MONGO_PASSWORD}@cluster0.akvsq.mongodb.net/{MONGO_NAME}?retryWrites=true&w=majority"
+    connect(MONGO_HOST)
 
 
 async def close_db():
