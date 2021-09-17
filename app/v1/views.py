@@ -6,7 +6,6 @@ from fastapi.params import Query
 from starlette.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from app.core.handlers import SignProcessHandler
-from app.core.helpers import notify_sns
 
 
 router = APIRouter()
@@ -14,7 +13,7 @@ router = APIRouter()
 
 @router.get(
     "/info/",
-    tags=['User']
+    tags=['Others']
 )
 def cancel():
     return JSONResponse(status_code=200, content=jsonable_encoder(SignProcessHandler.init()))
@@ -23,7 +22,7 @@ def cancel():
 @router.get(
     "/find/",
     response_model=UserPaginate,
-    tags=['User']
+    tags=['Others']
 )
 def find(item_per_page: int = 15, page: int = 1, order: str = "ASC", model_uuid: str = None):
     params = {

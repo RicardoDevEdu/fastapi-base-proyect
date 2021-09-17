@@ -1,14 +1,6 @@
-from enum import Enum
 from typing import List
 
 from pydantic import BaseModel
-
-
-class ProductSerializer(BaseModel):
-    name: str
-    description: str
-    stock: float
-
 
 class MetaPaginate(BaseModel):
     current_page: int
