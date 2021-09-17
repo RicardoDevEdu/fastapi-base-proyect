@@ -12,8 +12,8 @@ except:
     pass
 
 API_VERSION = "v1.0.0"
-APP_NAME = os.environ.get("APP_NAME", "demo")
-APP_DESCRIPTION = os.environ.get("APP_DESCRIPTION", "Descripcion demo")
+APP_NAME = os.environ.get("APP_NAME", "RecyCat Api")
+APP_DESCRIPTION = os.environ.get("APP_DESCRIPTION", "RecyCat Api")
 SENTRY = os.environ.get("SENTRY", "https://6ecb72f8e4294465bcfa41913285a7fb@o533297.ingest.sentry.io/5652760")
 
 
