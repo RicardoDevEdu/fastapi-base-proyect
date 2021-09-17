@@ -1,5 +1,8 @@
 # App Base FastApi
 
+# Create venv with conda
+virtualenv venv --python=/home/josericardo/anaconda3/envs/python39/bin/python 
+
 # construir Dockerfile 
 sudo docker build .
 
