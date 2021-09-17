@@ -7,7 +7,7 @@ router = APIRouter()
 
 @router.get("/", tags=["meta"])
 async def root():
-    return {"Service":APP_DESCRIPTION}
+    return {"Service": APP_DESCRIPTION}
 
 
 @router.get("/version", tags=["meta"])

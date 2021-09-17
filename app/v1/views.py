@@ -9,7 +9,6 @@ from app.core.handlers import SignProcessHandler
 from app.core.helpers import notify_sns
 
 
-
 router = APIRouter()
 
 
@@ -20,6 +19,7 @@ router = APIRouter()
 def cancel():
     return JSONResponse(status_code=200, content=jsonable_encoder(SignProcessHandler.init()))
 
+
 @router.get(
     "/find/",
     response_model=UserPaginate,
@@ -27,11 +27,9 @@ def cancel():
 )
 def find(item_per_page: int = 15, page: int = 1, order: str = "ASC", model_uuid: str = None):
     params = {
-        "item_per_page":item_per_page,
+        "item_per_page": item_per_page,
         "page": page,
         "order": order,
         "model_uuid": model_uuid
     }
     return SignProcessHandler.find(params)
-   
-

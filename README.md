@@ -26,3 +26,13 @@ sudo docker-compose up --build
 
 # bajar container
 sudo docker-compose down
+
+
+
+## Calidad
+
+# flake 8
+flake8 --exclude venv/ --ignore=W291 --output-file flake8.txt  --max-line-length 120
+
+# Autopep8
+autopep8 -i -r ./app/* 

@@ -13,3 +13,4 @@ sentry-sdk
 celery
 boto3
 pymongo[srv]
+autopep8

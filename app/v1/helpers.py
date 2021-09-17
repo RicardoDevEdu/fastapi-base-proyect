@@ -1,10 +1,12 @@
 import json
 import math
 
+
 def round_well(num):
     return math.ceil(num)
 
-def meta_paginate(data_filter ,params, query_set):
+
+def meta_paginate(data_filter, params, query_set):
     item_per_page = int(params.get("item_per_page", 15))
     page = int(params.get("page", 1))
     order = params.get("order", "DESC")
@@ -37,8 +39,8 @@ def meta_paginate(data_filter ,params, query_set):
     }
 
     output = {
-        "data":json.loads(query_result.to_json())
-    } 
+        "data": json.loads(query_result.to_json())
+    }
 
     output['meta'] = meta
 
