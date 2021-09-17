@@ -1,8 +1,3 @@
-import json
-from uuid import UUID
-from datetime import datetime
-from littlenv import littlenv
-from app.core import exceptions
 from app.core.process import ServicesProcess
 
 
@@ -14,9 +9,5 @@ class SignProcessHandler:
     @staticmethod
     def init():
         service = ServicesProcess()
-        return service.init()
+        pass
 
-    @staticmethod
-    def find(params: dict):
-        service = ServicesProcess()
-        return service.find(params)
