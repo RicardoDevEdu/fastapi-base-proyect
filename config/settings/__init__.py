@@ -1,16 +1,18 @@
 
+from starlette.responses import JSONResponse
+from app.core.exceptions import BusinessException
 import sentry_sdk
-from fastapi import FastAPI
+from fastapi import FastAPI, status
+from fastapi.encoders import jsonable_encoder
 from littlenv import littlenv
 from fastapi.middleware.cors import CORSMiddleware
-
 from config import urls
 from config.settings.base import (
     API_VERSION,
     SENTRY,
     APP_NAME,
     APP_DESCRIPTION,
-    connect_db, 
+    connect_db,
     close_db
 )
 
@@ -36,6 +38,12 @@ app = FastAPI(
     redoc_url="/api/v1/redoc",
     docs_url='/api/v1/docs',
 )
+
+
+"""
+Security config
+"""
+
 
 origins = ["*"]
 
@@ -63,6 +71,13 @@ app.add_event_handler(
 )
 
 
+"""
+Excepcion handling
+"""
 
-
-
+@app.exception_handler(BusinessException)
+async def validation_exception_handler(request, exc):
+      return JSONResponse(
+        status_code=exc.status_code,
+        content=jsonable_encoder({"detail": exc.message, "body": exc.code_error}),
+    )

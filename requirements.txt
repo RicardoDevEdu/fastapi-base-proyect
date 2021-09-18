@@ -14,3 +14,8 @@ celery
 boto3
 pymongo[srv]
 autopep8
+python-multipart
+python-jose
+passlib
+bcrypt
+pydash
