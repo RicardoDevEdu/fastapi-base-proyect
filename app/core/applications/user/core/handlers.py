@@ -10,4 +10,3 @@ class SignProcessHandler:
     def init():
         service = ServicesProcess()
         pass
-

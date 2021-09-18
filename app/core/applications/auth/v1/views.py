@@ -1,6 +1,6 @@
 from app.core.applications.auth.core.serializable import RequestLogin, ResponseAuth, ResponseTokenAut, TokenData
 from app.core.applications.auth.core.handlers import AuthHandler
-from fastapi import APIRouter,Depends
+from fastapi import APIRouter, Depends
 from fastapi.param_functions import Depends
 from fastapi.security import OAuth2PasswordBearer
 
@@ -21,4 +21,3 @@ def login(form_data: RequestLogin):
 @router.get("/auth/me/", response_model=ResponseAuth)
 def read_users_me(token: str = Depends(oauth2_scheme)):
     return AuthHandler.current_auth(token)
-

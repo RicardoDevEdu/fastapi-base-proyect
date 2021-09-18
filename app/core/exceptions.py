@@ -4,6 +4,7 @@ from typing import Any, Union, Dict, List, Optional
 
 ExceptionMessageType = Union[str, Dict[str, Any], List[Dict[str, Any]]]
 
+
 class BusinessException(Exception):
     """Excepción de negocio."""
     code_error = 1001

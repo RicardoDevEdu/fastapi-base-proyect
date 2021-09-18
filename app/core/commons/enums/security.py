@@ -1,6 +1,7 @@
 import os
 from enum import Enum
 
+
 class SecurityEnum(Enum):
     SECRET_KEY = os.getenv('SECRET_KEY')
     ALGORITHM = os.getenv('ALGORITHM')

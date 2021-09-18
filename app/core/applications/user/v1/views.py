@@ -10,4 +10,3 @@ router = APIRouter()
 )
 def get(id):
     return {'id': id}
-
