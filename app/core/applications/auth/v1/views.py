@@ -1,7 +1,7 @@
-from app.core.applications.auth.core.serializable import ( 
+from app.core.applications.auth.core.serializable import (
     RequestAuth,
-    RequestLogin, 
-    ResponseAuth, 
+    RequestLogin,
+    ResponseAuth,
     ResponseTokenAut
 )
 from app.core.applications.auth.core.handlers import AuthHandler

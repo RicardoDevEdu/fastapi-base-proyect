@@ -1,3 +1,4 @@
+from app.core.commons.events import Event, RegisterAuth
 import json
 from app.core.applications.auth.core.services.Oauth2 import Oauth2Service
 from app.core.applications.auth.core.serializable import RequestAuth, RequestLogin
@@ -19,6 +20,12 @@ class AuthHandler:
     @staticmethod
     def register(data: RequestAuth):
         auth = Oauth2Service.register(data)
+        
+        """
+        send event
+        """   
+        Event(RegisterAuth(auth)).emmit()
+
         return json.loads(auth.to_json())
 
     @staticmethod

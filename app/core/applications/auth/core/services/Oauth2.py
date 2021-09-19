@@ -62,7 +62,7 @@ class Oauth2Service:
         if auth is None:
             raise CredentialInvalid()
         return auth
-    
+
     @staticmethod
     def register(data: RequestAuth):
         model_auth = GenericQuerySet(Auth)

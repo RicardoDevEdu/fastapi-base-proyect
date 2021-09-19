@@ -1,0 +1,7 @@
+
+SUBSCRIBER = {
+    "RegisterAuth": [
+        "RegisterUser",
+        "RegisterUserSendEmail"
+    ]
+}
