@@ -22,7 +22,6 @@ class Oauth2Service:
 
     def authenticate(self):
         model_auth = GenericQuerySet(Auth)
-        #user = get_user(fake_users_db, username=token_data.email)
         auth = model_auth.filter_one({'email': self.data_login.email})
         if not auth:
             raise CredentialInvalid()

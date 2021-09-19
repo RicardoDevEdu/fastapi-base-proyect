@@ -1,10 +1,6 @@
 from app.v1.helpers import meta_paginate
 from app.core.QuerySet import GenericQuerySet
-import json
-
-from mongoengine.queryset.visitor import Q
 from .models import User
-from pydantic.types import List
 
 
 class ServicesProcess:

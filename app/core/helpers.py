@@ -1,10 +1,7 @@
 import hashlib
-import requests
 import io
 import json
 import logging
-import boto3
-from botocore.config import Config
 import os
 import uuid
 from datetime import datetime, timedelta
