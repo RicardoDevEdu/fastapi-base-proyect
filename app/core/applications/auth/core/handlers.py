@@ -1,4 +1,6 @@
-from app.core.commons.events import Event, RegisterAuth
+
+from app.core.commons.integration.auth.events import RegisterAuth
+from app.core.commons.integration.base.events import EventHandler
 import json
 from app.core.applications.auth.core.services.Oauth2 import Oauth2Service
 from app.core.applications.auth.core.serializable import RequestAuth, RequestLogin
@@ -23,9 +25,9 @@ class AuthHandler:
         
         """
         send event
-        """   
-        Event(RegisterAuth(auth)).emmit()
-
+        """ 
+        EventHandler(RegisterAuth(auth)).emmit()
+         
         return json.loads(auth.to_json())
 
     @staticmethod

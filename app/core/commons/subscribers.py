@@ -1,7 +1,0 @@
-
-SUBSCRIBER = {
-    "RegisterAuth": [
-        "RegisterUser",
-        "RegisterUserSendEmail"
-    ]
-}
