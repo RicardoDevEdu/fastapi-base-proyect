@@ -1,11 +1,6 @@
 import os
 from celery import Celery
-from littlenv import littlenv
 
-try:
-    littlenv.load()
-except:
-    pass
 
 celery_app = Celery(
     'tasks',

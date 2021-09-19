@@ -1,14 +1,12 @@
 import os
-
 import boto3
-import pymongo
 from botocore.config import Config
 from littlenv import littlenv
 from mongoengine import connect, disconnect
 
 try:
     littlenv.load()
-except:
+except Exception:
     pass
 
 API_VERSION = "v1.0.0"
@@ -17,19 +15,19 @@ APP_DESCRIPTION = os.environ.get("APP_DESCRIPTION", "RecyCat Api")
 SENTRY = os.environ.get("SENTRY", "https://6ecb72f8e4294465bcfa41913285a7fb@o533297.ingest.sentry.io/5652760")
 
 
-MONGO_NAME=os.environ.get('MONGO_NAME', 'test')
-MONGO_USER=os.environ.get('MONGO_USER', 'test')
-MONGO_PASSWORD=os.environ.get("MONGO_PASSWORD", "test")
-MONGO_CLUSTER=os.environ.get("MONGO_CLUSTER", "localhost")
+MONGO_NAME = os.environ.get('MONGO_NAME', 'test')
+MONGO_USER = os.environ.get('MONGO_USER', 'test')
+MONGO_PASSWORD = os.environ.get("MONGO_PASSWORD", "test")
+MONGO_CLUSTER = os.environ.get("MONGO_CLUSTER", "localhost")
+
 
 async def connect_db():
     """
-
     :return: connect mongodb
     mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false
     """
-    #MONGO_HOST=f"mongodb+srv://{MONGO_USER}:{MONGO_PASSWORD}@{MONGO_CLUSTER}/{MONGO_NAME}?retryWrites=true&w=majority"
-    MONGO_HOST=f"mongodb://{MONGO_CLUSTER}/{MONGO_NAME}?retryWrites=true&w=majority"
+    # MONGO_HOST=f"mongodb+srv://{MONGO_USER}:{MONGO_PASSWORD}@{MONGO_CLUSTER}/{MONGO_NAME}?retryWrites=true&w=majority"
+    MONGO_HOST = f"mongodb://{MONGO_CLUSTER}/{MONGO_NAME}?retryWrites=true&w=majority"
     connect(
         host=MONGO_HOST, 
         alias=os.environ.get('MONGO_NAME', 'test')

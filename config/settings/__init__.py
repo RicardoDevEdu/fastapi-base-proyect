@@ -1,8 +1,7 @@
-
+from fastapi import FastAPI
 from starlette.responses import JSONResponse
 from app.core.exceptions import BusinessException
 import sentry_sdk
-from fastapi import FastAPI, status
 from fastapi.encoders import jsonable_encoder
 from littlenv import littlenv
 from fastapi.middleware.cors import CORSMiddleware
@@ -19,7 +18,7 @@ from config.settings.base import (
 
 try:
     littlenv.load()
-except:
+except Exception:
     pass
 
 
@@ -75,9 +74,11 @@ app.add_event_handler(
 Excepcion handling
 """
 
+
 @app.exception_handler(BusinessException)
 async def validation_exception_handler(request, exc):
-      return JSONResponse(
+    return JSONResponse(
         status_code=exc.status_code,
-        content=jsonable_encoder({"detail": exc.message, "body": exc.code_error}),
+        content=jsonable_encoder(
+            {"detail": exc.message, "body": exc.code_error}),
     )

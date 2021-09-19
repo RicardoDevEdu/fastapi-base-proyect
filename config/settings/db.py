@@ -1,6 +1,4 @@
-from pymongo import MongoClient
 from pymongoext import Model
-
 from config.settings.base import connect_db_mongo
 
 

@@ -1,6 +1,6 @@
-from app.core.applications.auth.core.serializable import RequestLogin, ResponseAuth, ResponseTokenAut, TokenData
+from app.core.applications.auth.core.serializable import RequestLogin, ResponseAuth, ResponseTokenAut
 from app.core.applications.auth.core.handlers import AuthHandler
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 from fastapi.param_functions import Depends
 from fastapi.security import OAuth2PasswordBearer
 

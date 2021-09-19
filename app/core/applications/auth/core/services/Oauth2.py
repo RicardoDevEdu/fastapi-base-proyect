@@ -54,7 +54,7 @@ class Oauth2Service:
             if username is None:
                 raise CredentialInvalid()
             token_data = TokenData(email=username)
-        except JWTError as err:
+        except JWTError:
             raise CredentialInvalid()
         model_auth = GenericQuerySet(Auth)
         auth = model_auth.filter_one({'email': token_data.email})

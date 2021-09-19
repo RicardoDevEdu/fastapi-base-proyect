@@ -1,12 +1,10 @@
 import os
 from datetime import datetime
-from typing import Optional
 from uuid import uuid4
 from mongoengine import (
     fields
 )
 from mongoengine.document import DynamicDocument
-from pydantic.main import BaseModel
 
 
 class DocumentBase():

@@ -1,6 +1,4 @@
 import json
-from app.core.applications.auth.core.models import Auth
-from app.core.QuerySet import GenericQuerySet
 from app.core.applications.auth.core.services.Oauth2 import Oauth2Service
 from app.core.applications.auth.core.serializable import RequestLogin
 

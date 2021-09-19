@@ -25,3 +25,8 @@ class BusinessException(Exception):
             self.status_code = status_code
 
         super().__init__(self.message, *args)
+
+
+class FailedLoadEnv(BusinessException):
+    code_error = "CONFIG-2001"
+    message = "Failied loading environment"

@@ -1,8 +1,5 @@
-from typing import List
-from fastapi.encoders import jsonable_encoder
-from .serializers import BasePaginate, User, UserPaginate
-from fastapi import APIRouter, Response
-from fastapi.params import Query
+from .serializers import UserPaginate
+from fastapi import APIRouter
 from starlette.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from app.core.handlers import SignProcessHandler
