@@ -1,4 +1,4 @@
-from app.core.applications.auth.core.serializable import RequestLogin, TokenData
+from app.core.applications.auth.core.serializable import RequestAuth, RequestLogin, TokenData
 from app.core.applications.auth.core.QuerySet import GenericQuerySet
 from app.core.applications.auth.core.exceptions import CredentialInvalid, InactiveUser
 from app.core.applications.auth.core.models import Auth
@@ -62,6 +62,13 @@ class Oauth2Service:
         if auth is None:
             raise CredentialInvalid()
         return auth
+    
+    @staticmethod
+    def register(data: RequestAuth):
+        model_auth = GenericQuerySet(Auth)
+        pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+        data.hashed_password = pwd_context.hash(data.hashed_password)
+        return model_auth.create(dict(data))
 
     @staticmethod
     async def get_current_active_auth(self, token: str):

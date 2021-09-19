@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 
 from pydantic.main import BaseModel
 
@@ -30,6 +30,15 @@ class Auth(BaseModel):
     full_name: Optional[str] = None
     disabled: Optional[bool] = False
     hashed_password: str
+
+
+class RequestAuth(BaseModel):
+    email: str
+    full_name: Optional[str] = None
+    disabled: Optional[bool] = False
+    hashed_password: str
+    roles: Optional[List[str]]
+    scopes: Optional[List[str]]
 
 
 class Token(BaseModel):

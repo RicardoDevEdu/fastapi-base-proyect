@@ -1,4 +1,9 @@
-from app.core.applications.auth.core.serializable import RequestLogin, ResponseAuth, ResponseTokenAut
+from app.core.applications.auth.core.serializable import ( 
+    RequestAuth,
+    RequestLogin, 
+    ResponseAuth, 
+    ResponseTokenAut
+)
 from app.core.applications.auth.core.handlers import AuthHandler
 from fastapi import APIRouter
 from fastapi.param_functions import Depends
@@ -16,6 +21,15 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 )
 def login(form_data: RequestLogin):
     return AuthHandler.login(form_data)
+
+
+@router.post(
+    "/auth/register",
+    response_model=ResponseAuth,
+    tags=['Service Auth']
+)
+def register(form_data: RequestAuth):
+    return AuthHandler.register(form_data)
 
 
 @router.get("/auth/me/", response_model=ResponseAuth)

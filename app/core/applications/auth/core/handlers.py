@@ -1,6 +1,6 @@
 import json
 from app.core.applications.auth.core.services.Oauth2 import Oauth2Service
-from app.core.applications.auth.core.serializable import RequestLogin
+from app.core.applications.auth.core.serializable import RequestAuth, RequestLogin
 
 
 class AuthHandler:
@@ -15,6 +15,11 @@ class AuthHandler:
             "access_token": token,
             "token_type": "bearer"
         }
+
+    @staticmethod
+    def register(data: RequestAuth):
+        auth = Oauth2Service.register(data)
+        return json.loads(auth.to_json())
 
     @staticmethod
     def current_auth(token: str):
