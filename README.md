@@ -36,3 +36,8 @@ flake8 --exclude venv/ --ignore=W291 --output-file flake8.txt  --max-line-length
 
 # Autopep8
 autopep8 -i -r ./app/* 
+
+
+
+# run
+source venv/bin/activate

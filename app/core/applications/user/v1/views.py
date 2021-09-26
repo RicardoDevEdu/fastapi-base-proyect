@@ -1,12 +1,18 @@
+from app.core.applications.user.core.handlers import UserHandler
+from app.core.applications.user.core.serializable import (
+    RequestUserCompany, 
+    ResponseUserCompany
+)
 from fastapi import APIRouter
 
 
 router = APIRouter()
 
 
-@router.get(
-    "/user/{id}",
-    tags=['Service User']
+@router.post(
+    "/user/company",
+    response_model=ResponseUserCompany,
+    tags=['User']
 )
-def get(id):
-    return {'id': id}
+def register(form_data: RequestUserCompany):
+    return UserHandler.create_company(form_data.dict())

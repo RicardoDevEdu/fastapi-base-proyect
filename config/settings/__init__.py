@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from mongoengine.errors import OperationError
 from starlette.responses import JSONResponse
 from app.core.exceptions import BusinessException
 import sentry_sdk
