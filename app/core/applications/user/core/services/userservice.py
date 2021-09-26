@@ -15,8 +15,12 @@ class UserService:
     def create_company(self, data: RequestUserCompany):
         model_company = GenericQuerySet(Company)
         try:
+            data.update({
+                "auth": {
+                    "hashed_password": self._pwd_context.hash(data.get('auth').get('hashed_password'))
+                }
+            })
             company = model_company.create(dict(data))
             return company
         except NotUniqueError:
-            raise MongoUniqueError("email, identification or name") 
-         
+            raise MongoUniqueError("email, identification or name")
