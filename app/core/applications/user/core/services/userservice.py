@@ -21,6 +21,7 @@ class UserService:
                 }
             })
             company = model_company.create(dict(data))
+
             return company
         except NotUniqueError:
             raise MongoUniqueError("email, identification or name")

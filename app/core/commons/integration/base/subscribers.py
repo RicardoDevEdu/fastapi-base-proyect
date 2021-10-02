@@ -3,6 +3,9 @@ SUBSCRIBER = {
     "RegisterAuth": [
         "RegisterUser",
         "RegisterUserSendEmail"
+    ],
+    "RegisterUserCompanyEvent": [
+        "RegisterUserCompany"
     ]
 }
 
