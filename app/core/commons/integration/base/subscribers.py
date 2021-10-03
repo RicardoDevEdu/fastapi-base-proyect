@@ -9,6 +9,9 @@ SUBSCRIBER = {
     ],
     "RegisterUserEvent": [
         "RegisterUserListener"
+    ],
+    "UpdateUserEvent": [
+        "UpdateUserListener"
     ]
 }
 

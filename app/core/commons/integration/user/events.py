@@ -12,3 +12,8 @@ class RegisterUserCompanyEvent(BaseEvent):
 class RegisterUserEvent(BaseEvent):
     def __init__(self, user: User):
         self.user = user
+
+
+class UpdateUserEvent(BaseEvent):
+    def __init__(self, user: User):
+        self.user = user

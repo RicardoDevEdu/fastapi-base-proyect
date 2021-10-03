@@ -60,6 +60,12 @@ class UserService:
         try:
             model_user = GenericQuerySet(User)
 
+            data.update({
+                "auth": {
+                    "hashed_password": self._pwd_context.hash(data.get('auth').get('hashed_password'))
+                }
+            })
+
             model_user.update(
                 dict(uuid=id),
                 remove_item_none_of_dict(data)
@@ -81,7 +87,7 @@ class UserService:
             deleted_at=None
         ))
 
-        if len(users) == 0:
+        if users is None:
             raise UserNotFound(id)
 
         return users

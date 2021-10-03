@@ -1,6 +1,7 @@
 from app.core.commons.integration.user.events import (
     RegisterUserCompanyEvent,
-    RegisterUserEvent
+    RegisterUserEvent,
+    UpdateUserEvent
 )
 from app.core.commons.integration.base.events import EventHandler
 import json
@@ -41,12 +42,14 @@ class UserHandler:
     @staticmethod
     def update(id: str, data: RequestUpdateUser):
         user_sevice = UserService()
+
+        user = user_sevice.get(id)
       
         """
         Emmit event update user
-        
-        EventHandler(RegisterUserEvent(user)).emmit()
         """
+        EventHandler(UpdateUserEvent(user)).emmit()
+        
         
         return dict(uuid=user_sevice.update(id, data))
 
