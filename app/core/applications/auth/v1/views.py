@@ -29,7 +29,7 @@ def login(form_data: RequestLogin):
     tags=['Service Auth']
 )
 def register(form_data: RequestAuth):
-    return AuthHandler.register(form_data)
+    return AuthHandler.register(form_data.dict())
 
 
 @router.get("/auth/me/", response_model=ResponseAuth)

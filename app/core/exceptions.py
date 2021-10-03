@@ -30,3 +30,4 @@ class BusinessException(Exception):
 class FailedLoadEnv(BusinessException):
     code_error = "CONFIG-2001"
     message = "Failied loading environment"
+

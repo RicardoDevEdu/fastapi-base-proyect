@@ -30,7 +30,7 @@ class UserHandler:
     @staticmethod
     def create_user(data: RequestUser):
         user_sevice = UserService()
-        user = user_sevice.create(data)
+        user = user_sevice.create_user(data)
 
         """
         Emmit event register user (system an producer)
@@ -51,7 +51,7 @@ class UserHandler:
         EventHandler(UpdateUserEvent(user)).emmit()
         
         
-        return dict(uuid=user_sevice.update(id, data))
+        return dict(uuid=user_sevice.update_user(id, data))
 
     @staticmethod
     def list():
