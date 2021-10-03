@@ -84,3 +84,9 @@ def notify_sns(message: dict, subject: str = "notify"):
 
     Se relaiza consulta al api de aliatu
     """
+
+def remove_item_none_of_dict(data):
+    for key, value in dict(data).items():
+        if value is None:
+            del data[key]
+    return data

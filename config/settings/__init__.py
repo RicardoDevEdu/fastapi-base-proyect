@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from mongoengine.errors import OperationError
+from pymongo.errors import PyMongoError
 from starlette.responses import JSONResponse
 from app.core.exceptions import BusinessException
 import sentry_sdk
@@ -82,4 +83,12 @@ async def validation_exception_handler(request, exc):
         status_code=exc.status_code,
         content=jsonable_encoder(
             {"detail": exc.message, "body": exc.code_error}),
+    )
+
+@app.exception_handler(PyMongoError)
+async def validation_exception_handler(request, exc):
+    return JSONResponse(
+        status_code=500,
+        content=jsonable_encoder(
+            {"detail": "database error", "body": None}),
     )

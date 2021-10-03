@@ -34,9 +34,9 @@ class Auth(BaseModel):
 
 class RequestAuth(BaseModel):
     email: str
-    full_name: Optional[str] = None
-    disabled: Optional[bool] = False
     hashed_password: str
+    full_name: Optional[str]
+    disabled: Optional[bool]    
     roles: Optional[List[str]]
     scopes: Optional[List[str]]
 

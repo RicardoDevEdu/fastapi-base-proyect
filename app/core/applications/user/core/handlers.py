@@ -1,8 +1,15 @@
-from app.core.commons.integration.user.events import RegisterUserCompanyEvent
+from app.core.commons.integration.user.events import (
+    RegisterUserCompanyEvent,
+    RegisterUserEvent
+)
 from app.core.commons.integration.base.events import EventHandler
 import json
 from app.core.applications.user.core.services.userservice import UserService
-from app.core.applications.user.core.serializable import RequestUserCompany
+from app.core.applications.user.core.serializable import (
+    RequestUpdateUser,
+    RequestUserCompany,
+    RequestUser
+)
 
 
 class UserHandler:
@@ -16,5 +23,46 @@ class UserHandler:
         Emmit event register compay
         """
         EventHandler(RegisterUserCompanyEvent(company)).emmit()
-     
+
         return json.loads(company.to_json())
+
+    @staticmethod
+    def create_user(data: RequestUser):
+        user_sevice = UserService()
+        user = user_sevice.create(data)
+
+        """
+        Emmit event register user (system an producer)
+        """
+        EventHandler(RegisterUserEvent(user)).emmit()
+
+        return json.loads(user.to_json())
+
+    @staticmethod
+    def update(id: str, data: RequestUpdateUser):
+        user_sevice = UserService()
+      
+        """
+        Emmit event update user
+        
+        EventHandler(RegisterUserEvent(user)).emmit()
+        """
+        
+        return dict(uuid=user_sevice.update(id, data))
+
+    @staticmethod
+    def list():
+        user_sevice = UserService()
+        users = user_sevice.list()
+        return json.loads(users.to_json())
+
+    @staticmethod
+    def delete(id: str):
+        user_sevice = UserService()
+        return dict(uuid=user_sevice.delete(id))
+    
+    @staticmethod
+    def get(id: str):
+        user_sevice = UserService()
+        users = user_sevice.get(id)
+        return json.loads(users.to_json())

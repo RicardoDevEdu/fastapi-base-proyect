@@ -53,3 +53,37 @@ class ResponseUserCompany(BaseModel):
     status:     bool
     approved_by: Optional[ApprovedBy]
     third_party_data: Optional[ThirdPartyData]
+
+
+class RequestUser(BaseModel):
+    email: str
+    name: Optional[str]
+    last_name: Optional[str]
+    address: Optional[str]
+    status: Optional[bool] = True
+    auth: RequestAuthUser
+    scope: Optional[dict]
+
+
+class RequestUpdateUser(BaseModel):
+    email: Optional[str]
+    name: Optional[str]
+    last_name: Optional[str]
+    address: Optional[str]
+    status: Optional[bool] = True
+    auth: Optional[RequestAuthUser]
+    scope: Optional[dict]
+
+
+class ResponseUser(BaseModel):
+    uuid: str
+    email: str
+    name: Optional[str]
+    last_name: Optional[str]
+    address: Optional[str]
+    status: Optional[bool] = True
+    scope: Optional[dict]
+
+
+class ResponseUpdateOrDelete(BaseModel):
+    uuid: str

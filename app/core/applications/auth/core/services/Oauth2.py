@@ -64,11 +64,15 @@ class Oauth2Service:
         return auth
 
     @staticmethod
-    def register(data: RequestAuth):
+    def register(data: RequestAuth, hash_password: bool = True):
         model_auth = GenericQuerySet(Auth)
         pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-        data.hashed_password = pwd_context.hash(data.hashed_password)
-        return model_auth.create(dict(data))
+
+        if hash_password:
+            data.update(
+                hashed_password=pwd_context.hash(data.get('hashed_password'))
+            )
+        return model_auth.create(data)
 
     @staticmethod
     async def get_current_active_auth(self, token: str):

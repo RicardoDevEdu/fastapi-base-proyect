@@ -9,7 +9,7 @@ class GenericQuerySet:
     def update(self, key, data):
         return self.model.objects(
             **key
-        ).update_one(
+        ).update(
             **data
         )
 
@@ -38,7 +38,7 @@ class GenericQuerySet:
             **data
         )
 
-    def update_key(self, key, data, credit_request_code):
+    def update_key(self, key, data, uuid):
         return self.model.objects(
-            code=credit_request_code
+            uuid=uuid
         ).update_one(**{'set__{}'.format(key): data})

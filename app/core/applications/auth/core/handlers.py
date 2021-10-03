@@ -20,8 +20,8 @@ class AuthHandler:
         }
 
     @staticmethod
-    def register(data: RequestAuth):
-        auth = Oauth2Service.register(data)
+    def register(data: RequestAuth, hash_password: bool = True):
+        auth = Oauth2Service.register(data, hash_password)
         
         """
         send event

@@ -6,6 +6,9 @@ SUBSCRIBER = {
     ],
     "RegisterUserCompanyEvent": [
         "RegisterUserCompany"
+    ],
+    "RegisterUserEvent": [
+        "RegisterUserListener"
     ]
 }
 

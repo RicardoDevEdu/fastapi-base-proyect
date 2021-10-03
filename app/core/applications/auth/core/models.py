@@ -20,7 +20,7 @@ class DocumentBase():
 
 class Auth(DynamicDocument, DocumentBase):
     uuid = fields.UUIDField(default=uuid4(), binary=False)
-    full_name = fields.StringField(max_length=160, required=True, default=None)
+    full_name = fields.StringField(max_length=160, required=False, default=None)
     email = fields.StringField(max_length=160, required=True)
     hashed_password = fields.StringField(max_length=160, required=True)
     disabled = fields.BooleanField(default=False)
