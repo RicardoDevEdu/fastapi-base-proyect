@@ -34,6 +34,7 @@ class Company(DynamicDocument, DocumentBase):
     status: fields.BooleanField(default=False, required=False)
     disabled = fields.BooleanField(default=False, required=False)
     auth: fields.DictField()
+    tags: fields.ListField(fields.StringField(), required=False, default=[])
 
 class User(DynamicDocument, DocumentBase):
     uuid = fields.UUIDField(default=uuid4(), binary=False)    
