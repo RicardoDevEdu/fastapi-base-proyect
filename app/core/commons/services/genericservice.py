@@ -30,19 +30,18 @@ class GenericService(ABC):
         except NotUniqueError:
             raise MongoUniqueError("")
 
-    def list(self, description: Optional[str] = None):
+    def list(self, q: Optional[str] = None):
         querySet = self.querySet
 
         query_filter = dict(
             status=True,
             deleted_at=None    
-        )
-     
+        )     
 
         models = querySet.all(query_filter)
 
-        if description is not None:
-            models = models.search_text(description)
+        if q is not None:
+            models = models.search_text(q)
 
         return models
 

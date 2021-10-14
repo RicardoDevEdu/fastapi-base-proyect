@@ -1,4 +1,5 @@
 import json
+from typing import Optional
 from app.core.applications.publication.core.services.publicationservice import PulicationService
 from app.core.applications.publication.core.serializable import (
     RequestPublication
@@ -20,9 +21,9 @@ class PublicationHandler:
         return dict(uuid=pulication_sevice.update(id, data))
 
     @staticmethod
-    def list():
+    def list(q: Optional[str] = None):
         pulication_sevice = PulicationService()
-        pulications = pulication_sevice.list()
+        pulications = pulication_sevice.list(q)
         return json.loads(pulications.to_json())
 
     @staticmethod

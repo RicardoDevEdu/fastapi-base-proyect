@@ -36,8 +36,8 @@ def update(uuid: str, form_data: RequestMaterial):
     tags=['Materials'],
     summary= "Listado de materiales y filtro por descripción"
 )
-def list(description: Optional[str] = None):
-    return EducationHandler.list(description)
+def list(q: Optional[str] = None):
+    return EducationHandler.list(q)
 
 
 @router.delete(

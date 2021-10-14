@@ -21,9 +21,9 @@ class EducationHandler:
         return dict(uuid=sevice.update_material(id, data))
 
     @staticmethod
-    def list(description: Optional[str] = None):
+    def list(q: Optional[str] = None):
         sevice = MaterialService()
-        models = sevice.list(description)
+        models = sevice.list(q)
         return json.loads(models.to_json())
 
     @staticmethod

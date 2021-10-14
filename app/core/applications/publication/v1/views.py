@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from app.core.applications.publication.core.handlers import PublicationHandler
 from app.core.applications.publication.core.serializable import (
  RequestPublication,
@@ -35,8 +35,8 @@ def update(uuid: str, form_data: RequestPublication):
     response_model=List[ResponsePublication],
     tags=['Publications']
 )
-def list():
-    return PublicationHandler.list()
+def list(q: Optional[str] = None):
+    return PublicationHandler.list(q)
 
 
 @router.delete(

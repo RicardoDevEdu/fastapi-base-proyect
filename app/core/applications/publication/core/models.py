@@ -44,3 +44,10 @@ class Publication(DynamicDocument, DocumentBase):
     date_of_publication: fields.StringField(max_length=160, required=True, unique=True)
     status: fields.BooleanField(default=True, required=False)
 
+    meta = {'indexes': [
+        {'fields': ['$title', "$body"],
+         'default_language': 'spanish',
+         'weights': {'body': 10, 'title': 2}
+        }
+    ]}
+
