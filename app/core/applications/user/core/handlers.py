@@ -1,3 +1,4 @@
+from typing import List
 from app.core.applications.user.core.services.geoservice import GeoService
 from app.core.commons.integration.user.events import (
     RegisterUserCompanyEvent,
@@ -29,9 +30,9 @@ class UserHandler:
         return json.loads(company.to_json())
 
     @staticmethod
-    def geolocation(lat: float, long: float, max_distance: int):
+    def geolocation(lat: float, long: float, max_distance: int, tags: List[str] = None):
         sevice = GeoService()
-        models = sevice.location_near(lat, long, max_distance)
+        models = sevice.location_near(lat, long, max_distance, tags)
 
         return json.loads(models.to_json())
 

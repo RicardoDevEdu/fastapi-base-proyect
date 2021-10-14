@@ -1,4 +1,6 @@
 from typing import List
+
+from fastapi.params import Query
 from app.core.applications.user.core.handlers import UserHandler
 from app.core.applications.user.core.serializable import (
     RequestUpdateUser,
@@ -28,8 +30,8 @@ def register(form_data: RequestUserCompany):
     response_model=List[ResponseUserCompany],
     tags=['User']
 )
-def geolocation(lat: float, long: float, max_distance: int = 1000):
-    return UserHandler.geolocation(lat, long, max_distance)
+def geolocation(lat: float, long: float, max_distance: int = 1000, tags: List[str] =  Query(None)):
+    return UserHandler.geolocation(lat, long, max_distance, tags)
 
 
 @router.post(
