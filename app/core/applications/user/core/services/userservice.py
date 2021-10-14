@@ -39,7 +39,7 @@ class UserService(GenericService):
         })
         return self.update(id, data)
 
-    def folow(self, uuid_user: str,  data: RequestUserFolow):
+    def folow(self, uuid_user: str,  data: RequestUserFolow) -> str:
         self.set_query_set(User)
         self.model.objects(uuid=uuid_user).update_one(
             add_to_set__companies_followed=dict(
