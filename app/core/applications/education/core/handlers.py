@@ -1,4 +1,5 @@
 import json
+from typing import Optional
 from app.core.applications.education.core.services.materialservice import MaterialService
 from app.core.applications.education.core.serializable import (
     RequestMaterial
@@ -20,9 +21,9 @@ class EducationHandler:
         return dict(uuid=sevice.update_material(id, data))
 
     @staticmethod
-    def list():
+    def list(description: Optional[str] = None):
         sevice = MaterialService()
-        models = sevice.list()
+        models = sevice.list(description)
         return json.loads(models.to_json())
 
     @staticmethod

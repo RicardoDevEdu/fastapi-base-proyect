@@ -1,5 +1,6 @@
 from abc import ABC
 from datetime import datetime
+from typing import Optional
 
 from mongoengine.errors import NotUniqueError
 from pydantic.main import BaseModel
@@ -29,13 +30,20 @@ class GenericService(ABC):
         except NotUniqueError:
             raise MongoUniqueError("")
 
-    def list(self):
+    def list(self, description: Optional[str] = None):
         querySet = self.querySet
 
-        models = querySet.all(dict(
+        query_filter = dict(
             status=True,
-            deleted_at=None
-        ))
+            deleted_at=None    
+        )
+     
+
+        models = querySet.all(query_filter)
+
+        if description is not None:
+            models = models.search_text(description)
+
         return models
 
     def update(self, id: str, data):

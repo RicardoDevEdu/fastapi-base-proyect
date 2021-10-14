@@ -55,3 +55,10 @@ class Material(DynamicDocument, DocumentBase):
     gather = fields.ListField(fields.EmbeddedDocumentField(Gather), required=False)
     process = fields.ListField(fields.EmbeddedDocumentField(Process), required=False)
     status= fields.BooleanField(default=True, required=False)
+
+    meta = {'indexes': [
+        {'fields': ['$name', "$description"],
+         'default_language': 'spanish',
+         'weights': {'description': 10, 'name': 2}
+        }
+    ]}

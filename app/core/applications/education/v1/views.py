@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from app.core.applications.education.core.handlers import EducationHandler
 from app.core.applications.education.core.serializable import (
  ResponseMaterial,
@@ -33,10 +33,11 @@ def update(uuid: str, form_data: RequestMaterial):
 @router.get(
     "/material",
     response_model=List[ResponseMaterial],
-    tags=['Materials']
+    tags=['Materials'],
+    summary= "Listado de materiales y filtro por descripción"
 )
-def list():
-    return EducationHandler.list()
+def list(description: Optional[str] = None):
+    return EducationHandler.list(description)
 
 
 @router.delete(
