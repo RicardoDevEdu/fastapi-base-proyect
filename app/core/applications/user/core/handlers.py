@@ -1,3 +1,4 @@
+from app.core.applications.user.core.services.geoservice import GeoService
 from app.core.commons.integration.user.events import (
     RegisterUserCompanyEvent,
     RegisterUserEvent,
@@ -28,6 +29,13 @@ class UserHandler:
         return json.loads(company.to_json())
 
     @staticmethod
+    def geolocation(lat: float, long: float, max_distance: int):
+        sevice = GeoService()
+        models = sevice.location_near(lat, long, max_distance)
+
+        return json.loads(models.to_json())
+
+    @staticmethod
     def create_user(data: RequestUser):
         user_sevice = UserService()
         user = user_sevice.create_user(data)
@@ -44,13 +52,12 @@ class UserHandler:
         user_sevice = UserService()
 
         user = user_sevice.get(id)
-      
+
         """
         Emmit event update user
         """
         EventHandler(UpdateUserEvent(user)).emmit()
-        
-        
+
         return dict(uuid=user_sevice.update_user(id, data))
 
     @staticmethod
@@ -63,7 +70,7 @@ class UserHandler:
     def delete(id: str):
         user_sevice = UserService()
         return dict(uuid=user_sevice.delete(id))
-    
+
     @staticmethod
     def get(id: str):
         user_sevice = UserService()

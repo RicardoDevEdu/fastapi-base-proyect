@@ -1,11 +1,10 @@
-from typing import Optional
+from typing import List, Optional
 from pydantic.main import BaseModel
 
 
 class Location(BaseModel):
-    latitud: float
-    longitud: float
-
+    type: Optional[str] = "Point"
+    coordinates: List[float]
 
 class ThirdPartyData(BaseModel):
     categoria_matricula: str
@@ -39,6 +38,7 @@ class RequestUserCompany(BaseModel):
     address: Optional[str]
     location: Optional[Location]
     status: bool
+    tags: List[str]
     auth: RequestAuthUser
 
 

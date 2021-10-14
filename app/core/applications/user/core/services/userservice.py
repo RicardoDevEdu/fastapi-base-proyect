@@ -1,19 +1,10 @@
-from datetime import datetime
-
-from mongoengine.errors import NotUniqueError
-from app.core.applications.user.core.exceptions import UserNotFound
-from typing import Dict, List
-
 from app.core.applications.user.core.models import Company, User
-from app.core.applications.auth.core.QuerySet import GenericQuerySet
 from app.core.applications.user.core.serializable import (
     RequestUpdateUser,
     RequestUser,
     RequestUserCompany
 )
 from passlib.context import CryptContext
-from app.core.commons.exceptions import MongoUniqueError
-from app.core.commons.helpers import remove_item_none_of_dict
 from app.core.commons.services.genericservice import GenericService
 
 

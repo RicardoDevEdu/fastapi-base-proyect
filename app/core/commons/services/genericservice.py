@@ -1,9 +1,9 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 from datetime import datetime
 
 from mongoengine.errors import NotUniqueError
 from pydantic.main import BaseModel
-from app.core.applications.auth.core.QuerySet import GenericQuerySet
+from app.core.commons.QuerySet import GenericQuerySet
 
 from app.core.commons.exceptions import ModelNotFound, MongoUniqueError
 from app.core.commons.helpers import remove_item_none_of_dict
@@ -11,15 +11,16 @@ from app.core.commons.helpers import remove_item_none_of_dict
 
 class GenericService(ABC):
 
-
-    def __init__(self, model: BaseModel):  
+    def __init__(self, model: BaseModel):
         self.model = model
         self.querySet = GenericQuerySet(self.model)
-
 
     def set_query_set(self, model: BaseModel):
         self.querySet = GenericQuerySet(model)
 
+    @property
+    def query_set(self):
+        return self.querySet
 
     def create(self, data: BaseModel):
         querySet = self.querySet

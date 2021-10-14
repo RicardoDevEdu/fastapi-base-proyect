@@ -23,6 +23,15 @@ def register(form_data: RequestUserCompany):
     return UserHandler.create_company(form_data.dict())
 
 
+@router.get(
+    "/user/company/geolocation",
+    response_model=List[ResponseUserCompany],
+    tags=['User']
+)
+def geolocation(lat: float, long: float, max_distance: int = 1000):
+    return UserHandler.geolocation(lat, long, max_distance)
+
+
 @router.post(
     "/user/producer",
     response_model=ResponseUser,
