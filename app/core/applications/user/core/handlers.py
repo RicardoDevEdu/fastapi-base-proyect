@@ -11,7 +11,8 @@ from app.core.applications.user.core.services.userservice import UserService
 from app.core.applications.user.core.serializable import (
     RequestUpdateUser,
     RequestUserCompany,
-    RequestUser
+    RequestUser,
+    RequestUserFolow
 )
 
 
@@ -35,6 +36,13 @@ class UserHandler:
         models = sevice.location_near(lat, long, max_distance, tags)
 
         return json.loads(models.to_json())
+
+
+    @staticmethod
+    def folow(uuid_user: str, form_data: RequestUserFolow):
+        sevice = UserService()
+        
+        return dict(uuid=sevice.folow(uuid_user, form_data))
 
     @staticmethod
     def create_user(data: RequestUser):

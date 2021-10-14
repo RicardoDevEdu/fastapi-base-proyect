@@ -1,3 +1,4 @@
+from enum import Enum
 from typing import List, Optional
 from pydantic.main import BaseModel
 
@@ -5,6 +6,15 @@ from pydantic.main import BaseModel
 class Location(BaseModel):
     type: Optional[str] = "Point"
     coordinates: List[float]
+
+class TypeModelEnum(str, Enum):
+    user = 'user'
+    company = 'company'
+
+class RequestUserFolow(BaseModel):
+    type: TypeModelEnum = TypeModelEnum.user
+    name: str
+    uuid: str
 
 class ThirdPartyData(BaseModel):
     categoria_matricula: str

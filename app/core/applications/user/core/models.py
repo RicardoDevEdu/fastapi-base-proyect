@@ -5,7 +5,7 @@ from uuid import uuid4
 from mongoengine import (
     fields
 )
-from mongoengine.document import DynamicDocument
+from mongoengine.document import DynamicDocument, EmbeddedDocument
 
 
 class DocumentBase:
@@ -22,6 +22,9 @@ class DocumentBase:
         null=True
     )
 
+class CompaniesFollowed(EmbeddedDocument):
+    uuid = fields.StringField(max_length=160, required=True, unique=True)
+    name = fields.StringField(max_length=160, required=True, unique=True)
 
 class Company(DynamicDocument, DocumentBase):
     uuid = fields.UUIDField(default=uuid4(), binary=False)    
@@ -35,6 +38,7 @@ class Company(DynamicDocument, DocumentBase):
     disabled = fields.BooleanField(default=False, required=False)
     auth = fields.DictField()
     tags = fields.ListField(fields.StringField(), required=False, default=[])
+    companies_followed = fields.ListField(CompaniesFollowed, required=False, default=[])
 
     meta = {
          'indexes': [[("location", "2dsphere")]]

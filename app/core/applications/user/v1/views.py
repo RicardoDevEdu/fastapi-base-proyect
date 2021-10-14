@@ -8,7 +8,8 @@ from app.core.applications.user.core.serializable import (
     RequestUser,
     ResponseUpdateOrDelete,
     ResponseUser,
-    ResponseUserCompany
+    ResponseUserCompany,
+    RequestUserFolow
 )
 from fastapi import APIRouter
 
@@ -25,10 +26,19 @@ def register(form_data: RequestUserCompany):
     return UserHandler.create_company(form_data.dict())
 
 
+@router.patch(
+    "/user/{uuid_user}/folow",
+    response_model=ResponseUpdateOrDelete,
+    tags=['User Actions and Special Filters']
+)
+def folow(uuid_user: str, form_data: RequestUserFolow):
+    return UserHandler.folow(uuid_user, form_data.dict())
+
+
 @router.get(
     "/user/company/geolocation",
     response_model=List[ResponseUserCompany],
-    tags=['User']
+    tags=['User Actions and Special Filters']
 )
 def geolocation(lat: float, long: float, max_distance: int = 1000, tags: List[str] =  Query(None)):
     return UserHandler.geolocation(lat, long, max_distance, tags)
