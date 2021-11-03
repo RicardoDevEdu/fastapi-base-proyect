@@ -27,14 +27,13 @@ class GenericService(ABC):
         querySet = self.querySet
         try:
             return querySet.create(dict(data))
-        except NotUniqueError:
+        except NotUniqueError as e:
             raise MongoUniqueError("")
 
     def list(self, q: Optional[str] = None):
         querySet = self.querySet
 
         query_filter = dict(
-            status=True,
             deleted_at=None    
         )     
 
@@ -53,7 +52,7 @@ class GenericService(ABC):
                 remove_item_none_of_dict(data)
             )
             return id
-        except NotUniqueError:
+        except NotUniqueError as e:
             raise MongoUniqueError("")
 
     def delete(self, id: str):

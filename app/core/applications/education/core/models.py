@@ -45,20 +45,18 @@ class Image(EmbeddedDocument):
 
 
 class Material(DynamicDocument, DocumentBase):
-    uuid = fields.UUIDField(default=uuid4(), binary=False)
-    tag = fields.StringField(max_length=160, required=True, unique=True)
-    name = fields.StringField(max_length=160, required=True, unique=True)
-    description = fields.StringField(max_length=500, required=True, unique=True)
-    image = fields.EmbeddedDocumentField(Image)
-    features = fields.ListField(fields.EmbeddedDocumentField(Feature), required=False)
-    pull_apart = fields.ListField(fields.EmbeddedDocumentField(PullApart), required=False)
-    gather = fields.ListField(fields.EmbeddedDocumentField(Gather), required=False)
-    process = fields.ListField(fields.EmbeddedDocumentField(Process), required=False)
+    uuid = fields.UUIDField(default=uuid4, binary=False , unique=True)
+    tag = fields.StringField(max_length=160, required=True, unique=False)
+    name = fields.StringField(max_length=160, required=True, unique=False)
+    images = fields.StringField(max_length=250, required=True, unique=False)
+    features = fields.StringField(max_length=500, required=True, unique=False)
+    pull_apart = fields.StringField(max_length=500, required=True, unique=False)
+    process = fields.StringField(max_length=500, required=True, unique=False)
     status= fields.BooleanField(default=True, required=False)
 
     meta = {'indexes': [
-        {'fields': ['$name', "$description"],
+        {'fields': ['$name', "$features"],
          'default_language': 'spanish',
-         'weights': {'description': 10, 'name': 2}
+         'weights': {'features': 10, 'name': 2}
         }
     ]}

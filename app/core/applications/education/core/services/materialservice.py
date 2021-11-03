@@ -1,8 +1,10 @@
+import os
 import uuid
 from app.core.applications.education.core.models import Material
 from app.core.applications.education.core.serializable import (
     RequestMaterial
 )
+from app.core.commons.helpers import get_imagen_data, get_tags
 
 from app.core.commons.services.aws import AwsService
 from app.core.commons.services.genericservice import GenericService
@@ -14,49 +16,37 @@ class MaterialService(GenericService):
         super().__init__(Material)
 
     def create_material(self, data: RequestMaterial):
-        image = data.get('image')
-        file_name = f"{uuid.uuid4()}.{image.get('type')}"
+
+        
+        image_data = get_imagen_data(data.get('images'))
+
+        file_name = f"{uuid.uuid4()}.{image_data.get('type')}"
         self.aws_service.upload_file_base64(
             file_name,
-            image.get('mime_type'),
-            image.get('content')
-        )
+            image_data.get('mimetype'),
+            image_data.get('content')
+            )
 
-        image = dict(
-            url=file_name,
-            size=image.get('size')
-        )
-
-        data.update({'image': image})
+        data.update({
+            'images': f"{os.getenv('URL_PUBLIC_S3')}{file_name}"
+        })
 
         return self.create(data)
 
     def update_material(self, id: str, data: RequestMaterial):
-        image = data.get('image')
-        file_name = f"{uuid.uuid4()}.{image.get('type')}"
-        self.aws_service.upload_file_base64(
-            file_name,
-            image.get('mime_type'),
-            image.get('content')
-        )
+        image_data = get_imagen_data(data.get('images'))
 
-        image = dict(
-            url=file_name,
-            size=image.get('size')
-        )
+        if image_data is not None:
+            file_name = f"{uuid.uuid4()}.{image_data.get('type')}"
+            self.aws_service.upload_file_base64(
+                file_name,
+                image_data.get('mimetype'),
+                image_data.get('content')
+                )
 
-        data.update({'image': image})
+            data.update({
+                'images': f"{os.getenv('URL_PUBLIC_S3')}{file_name}"
+            })     
 
         return self.update(id, data)
-
-    def get_material(self,  id: str):
-        material = self.get(id)
-        material_json = material.to_mongo().to_dict()
-        image = material_json.get('image')
  
-        material_json.update({'image': {
-            "url":self.aws_service.presigned_url(image.get('url')),
-            "size":image.get('size')
-        }})
-
-        return material_json

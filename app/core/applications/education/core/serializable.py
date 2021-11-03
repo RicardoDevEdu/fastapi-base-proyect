@@ -34,24 +34,20 @@ class ResponseImage(BaseModel):
 class RequestMaterial(BaseModel):
     tag: str
     name: str
-    description: str
-    image: Image
-    features: Optional[List[Features]]
-    pull_apart: Optional[List[PullApart]]
-    gather: Optional[List[Gather]]
-    process: Optional[List[Process]]
+    images: Optional[str]
+    features: str
+    pull_apart: str 
+    process: str
 
 
 class ResponseMaterial(BaseModel):
     uuid: str
     tag: str
     name: str
-    description: str
-    image: ResponseImage
-    features: Optional[List[Features]]
-    pull_apart: Optional[List[PullApart]]
-    gather: Optional[List[Gather]]
-    process: Optional[List[Process]]
+    images: Optional[str]
+    features: str
+    pull_apart: str 
+    process: str
 
 
 class ResponseUpdateOrDelete(BaseModel):

@@ -8,3 +8,13 @@ class UserNotFound(BusinessException):
 
     code_error = "USER-1002"
     status_code = 404
+
+
+class ExtradataNotFound(BusinessException):
+
+    def __init__(self):
+        self.message = f"Extra data not found"
+
+    code_error = "COMPANY-1004"
+    status_code = 404
+

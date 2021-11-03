@@ -71,6 +71,7 @@ class AwsService:
             Key=file_name,
             Body=base64.b64decode(object_base64),
             ContentType=mime_type,
+            ACL="public-read"
         )
 
     def presigned_url(self, file_name: str, bucket_name=str(AwsEnum.S3_BUCKET_DEFAULT.value)):
@@ -78,4 +79,4 @@ class AwsService:
         return bucket.generate_presigned_url(
             ClientMethod='get_object',
             Params={'Bucket': bucket_name, 'Key': file_name},
-            ExpiresIn=3600)
+            ExpiresIn=31557600)

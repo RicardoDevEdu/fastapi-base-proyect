@@ -1,3 +1,4 @@
+from typing import List
 from app.core.applications.user.core.models import Company, User
 from app.core.applications.user.core.serializable import (
     RequestUpdateUser,
@@ -32,11 +33,13 @@ class UserService(GenericService):
         return self.create(data)
 
     def update_user(self, id: str, data: RequestUpdateUser) -> User:
-        data.update({
-            "auth": {
-                "hashed_password": self._pwd_context.hash(data.get('auth').get('hashed_password'))
-            }
-        })
+
+        if data.get('auth'):
+            data.update({
+                "auth": {
+                    "hashed_password": self._pwd_context.hash(data.get('auth').get('hashed_password'))
+                }
+            })
         return self.update(id, data)
 
     def folow(self, uuid_user: str,  data: RequestUserFolow) -> str:
@@ -48,3 +51,22 @@ class UserService(GenericService):
             )
         )
         return uuid_user
+
+    def get_company(self, uuid: str):
+        self.set_query_set(Company)
+        return self.get(uuid)
+
+    def list_with_filter(self, roles: List[str], status: bool = True):
+        self.set_query_set(User)
+        models = self.query_set.model.objects(
+            deleted_at=None,
+            __raw__={'roles': {'$in':roles}}
+        )
+        return models
+
+    def list_company_with_filter(self, status: bool = True):
+        self.set_query_set(Company)
+        models = self.query_set.model.objects(
+            deleted_at=None
+        )
+        return models

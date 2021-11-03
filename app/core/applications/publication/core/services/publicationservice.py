@@ -1,9 +1,11 @@
+import os
 import uuid
 from app.core.applications.publication.core.models import Publication
 from app.core.applications.publication.core.serializable import (
     RequestPublication
 )
 from passlib.context import CryptContext
+from app.core.commons.helpers import get_imagen_data, get_tags
 from app.core.commons.services.aws import AwsService
 from app.core.commons.services.genericservice import GenericService
 
@@ -15,23 +17,45 @@ class PulicationService(GenericService):
         super().__init__(Publication)
 
     def create_publication(self, data: RequestPublication):
-        images = []
-        for image in data.get('images'):
-            file_name = f"{uuid.uuid4()}.{image.get('type')}"
-            self.aws_service.upload_file_base64(
-                file_name,
-                image.get('mime_type'),
-                image.get('content')
+ 
+        image_data = get_imagen_data(data.get('images'))
+
+        file_name = f"{uuid.uuid4()}.{image_data.get('type')}"
+        self.aws_service.upload_file_base64(
+            file_name,
+            image_data.get('mimetype'),
+            image_data.get('content')
             )
 
-            images.append((dict(
-                url=file_name,
-                size=image.get('size')
-            )))
-
-        data.update({'images': images})
+        data.update({
+            'images': f"{os.getenv('URL_PUBLIC_S3')}{file_name}",
+            'tags': get_tags(data.get('tags'))
+        })
 
         return self.create(data)
+
+
+    def update_publication(self,id: str, data: RequestPublication):
+ 
+        image_data = get_imagen_data(data.get('images'))
+
+        if image_data is not None:
+            file_name = f"{uuid.uuid4()}.{image_data.get('type')}"
+            self.aws_service.upload_file_base64(
+                file_name,
+                image_data.get('mimetype'),
+                image_data.get('content')
+                )
+
+            data.update({
+                'images': f"{os.getenv('URL_PUBLIC_S3')}{file_name}"
+            })
+
+        data.update({
+            'tags': get_tags(data.get('tags'))
+        })
+
+        return self.update(id, data)
 
     def get_publications(self,  id: str):
         publication = self.get(id)

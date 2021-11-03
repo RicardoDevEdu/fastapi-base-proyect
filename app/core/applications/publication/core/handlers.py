@@ -18,7 +18,7 @@ class PublicationHandler:
     def update(id: str, data: RequestPublication):
         pulication_sevice = PulicationService()
         pulication_sevice.get(id)
-        return dict(uuid=pulication_sevice.update(id, data))
+        return dict(uuid=pulication_sevice.update_publication(id, data))
 
     @staticmethod
     def list(q: Optional[str] = None):
@@ -34,4 +34,5 @@ class PublicationHandler:
     @staticmethod
     def get(id: str):
         pulication_sevice = PulicationService()
-        return pulication_sevice.get_publications(id)
+        pulication = pulication_sevice.get(id)
+        return json.loads(pulication.to_json())

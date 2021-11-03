@@ -23,9 +23,9 @@ class DocumentBase:
     )
 
 class Author(EmbeddedDocument):
-    name: fields.StringField(max_length=160, required=True, unique=True)
-    mode: fields.StringField(max_length=160, required=True, unique=True)
-    uuid: fields.StringField(max_length=160, required=True, unique=True)
+    name= fields.StringField(max_length=160, required=True)
+    mode= fields.StringField(max_length=160, required=False)
+    uuid= fields.StringField(max_length=160, required=True)
 
 
 class Image(EmbeddedDocument):
@@ -35,14 +35,14 @@ class Image(EmbeddedDocument):
 
 
 class Publication(DynamicDocument, DocumentBase):
-    uuid = fields.UUIDField(default=uuid4(), binary=False)
-    title: fields.StringField(max_length=160, required=True, unique=True)
-    body: fields.StringField(max_length=500, required=True, unique=True)
-    images: fields.ListField(fields.EmbeddedDocumentField(Image))
-    tags: fields.ListField(fields.StringField())
-    author: fields.EmbeddedDocumentField(Author)
-    date_of_publication: fields.StringField(max_length=160, required=True, unique=True)
-    status: fields.BooleanField(default=True, required=False)
+    uuid = fields.UUIDField(default=uuid4, binary=False, unique=True)
+    title= fields.StringField(max_length=160, required=True, unique=True)
+    body= fields.StringField(max_length=500, required=True, unique=True)
+    images= fields.StringField(max_length=500, required=True, unique=True)
+    tags= fields.ListField(fields.StringField())
+    author= fields.EmbeddedDocumentField(Author, required=False)
+    date_of_publication= fields.StringField(max_length=160, required=False)
+    status= fields.BooleanField(default=True, required=False)
 
     meta = {'indexes': [
         {'fields': ['$title', "$body"],

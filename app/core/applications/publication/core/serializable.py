@@ -4,7 +4,7 @@ from pydantic.main import BaseModel
 
 class Author(BaseModel):
     name: str
-    mode: str
+    mode: Optional[str]
     uuid: str
 
 
@@ -24,10 +24,10 @@ class ResponseImage(BaseModel):
 class RequestPublication(BaseModel):
     title: str
     body: str
-    images: List[Image]
-    tags: List[str]
-    author: Author
-    date_of_publication: str
+    images: Optional[str]
+    tags: str
+    author: Optional[Author]
+    date_of_publication: Optional[str]
     status: Optional[bool] = True
 
 
@@ -35,10 +35,10 @@ class ResponsePublication(BaseModel):
     uuid: str
     title: str
     body: str
-    images: List[ResponseImage]
+    images: Optional[str]
     tags: List[str]
-    author: Author
-    date_of_publication: str
+    author: Optional[Author]
+    date_of_publication: Optional[str]
     status: Optional[bool]
 
 

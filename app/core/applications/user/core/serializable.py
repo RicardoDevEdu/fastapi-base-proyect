@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import List, Optional
+from typing import List, Optional, Union
 from pydantic.main import BaseModel
 
 
@@ -17,18 +17,18 @@ class RequestUserFolow(BaseModel):
     uuid: str
 
 class ThirdPartyData(BaseModel):
-    categoria_matricula: str
-    clase_identificacion: Optional[str]
-    codigo_camara: int
-    codigo_estado: str
+    categoriaMatricula: str
+    claseIdentificacion: Optional[str]
+    codigoCamara: int
+    codigoEstado: str
     identificacion: Optional[str]
     estado: str
-    numero_matricula: str
-    nombre_camara: str
-    organizacion_juridica: str
-    razon_social: str
+    numeroMatricula: str
+    nombreCamara: str
+    organizacionJuridica: str
+    razonSocial: str
     sigla: Optional[str]
-    tipo_empresa: str
+    tipoEmpresa: str
 
 
 class RequestAuthUser(BaseModel):
@@ -62,7 +62,7 @@ class ResponseUserCompany(BaseModel):
     location: Optional[Location]
     status:     bool
     approved_by: Optional[ApprovedBy]
-    third_party_data: Optional[ThirdPartyData]
+    third_party_data: Optional[Union[ThirdPartyData,None]]
 
 
 class RequestUser(BaseModel):
@@ -93,6 +93,7 @@ class ResponseUser(BaseModel):
     address: Optional[str]
     status: Optional[bool] = True
     scope: Optional[dict]
+    roles: Optional[List[str]]
 
 
 class ResponseUpdateOrDelete(BaseModel):

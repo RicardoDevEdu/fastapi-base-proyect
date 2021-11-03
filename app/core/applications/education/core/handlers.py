@@ -34,4 +34,5 @@ class EducationHandler:
     @staticmethod
     def get(id: str):
         sevice = MaterialService()
-        return sevice.get_material(id)
+        model = sevice.get(id)
+        return json.loads(model.to_json())

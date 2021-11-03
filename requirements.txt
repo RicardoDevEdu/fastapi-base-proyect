@@ -20,3 +20,4 @@ passlib
 bcrypt
 pydash
 boto3-stubs[s3]
+requests
